@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        
+        <h:form>
+            <center>
+                <h1>Search Employee Form</h1>
+                
+                <h:outputLabel value="Department :  " for="deptName" />
+                
+                <h:selectOneMenu id="deptName" value="#{employeeBean.deptName}">
+                    <f:selectItem itemValue="All" itemLabel="All"></f:selectItem>
+                    <f:selectItems var="d" value="#{employeeBean.departments}" itemValue="#{d.deptName}" itemLabel="#{d.deptName}">
+                        
+                    </f:selectItems>
+                </h:selectOneMenu>
+    
+                <br/><br/>
+                <h:outputLabel value="Minimum range for salary : " for="sal"/>
+                <h:inputText value="#{employeeBean.salary}" />
+                
+                <br/><br/>
+                <h:commandButton id="b1" value="Search" action="#{employeeBean.filterEmpList()}">
+<!--                    <f:ajax event="click" execute="deptName" render="tb1" />-->
+                </h:commandButton>
+                
+                <br/><br/>
+                <h:dataTable id="tb1" var="e" border="2" value="#{employeeBean.filterEmpList()}" cellpadding="2" cellspacing="2" width="600">
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{e.fname} #{e.lname}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Age</f:facet>
+                        <h:outputText value="#{e.age}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Salary</f:facet>
+                        <h:outputText value="#{e.salary}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Department</f:facet>
+                        <h:outputText value="#{e.dept.deptName}"/>
+                    </h:column>
+                </h:dataTable>
+            </center>
+            
+            
+            
+        </h:form>
+        
+        
+    </h:body>
+</html>
+

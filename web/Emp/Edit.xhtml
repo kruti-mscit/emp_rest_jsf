@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1><h:outputText value="Edit Employee" /></h1>
+            <h:inputHidden value="#{employeeBean.empId}" />
+            <h:panelGrid columns="2">
+                
+                <h:outputLabel value="First Name" for="fname"/>
+                <h:inputText id="fname" value="#{employeeBean.fname}" required="true" requiredMessage="First name should not be empty!" />
+            
+                <h:outputLabel value="Last Name" for="lname"/>
+                <h:inputText id="lname" value="#{employeeBean.lname}" required="true" requiredMessage="Last name should not be empty!" />
+            
+                <h:outputLabel value="Age" for="age"/>
+                <h:inputText id="age" value="#{employeeBean.age}" required="true" requiredMessage="Age should not be empty!" />
+            
+                
+                <h:outputLabel value="Salary" for="salary"/>
+                <h:inputText id="salary" value="#{employeeBean.salary}" required="true" requiredMessage="Salary should not be empty!" />
+            
+                <h:outputLabel value="Department" for="deptId"/>
+                <h:selectOneMenu id="deptId" value="#{employeeBean.deptId}">
+                    <f:selectItems value="#{employeeBean.departments}" var="d" itemValue="#{d.deptId}" itemLabel="#{d.deptName}">
+                        
+                    </f:selectItems>
+                </h:selectOneMenu>
+                
+                <h:commandButton action="#{employeeBean.edit()}" value="SAVE" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

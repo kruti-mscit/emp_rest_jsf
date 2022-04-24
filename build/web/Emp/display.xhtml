@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+     >
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <center>
+            <h:form>
+                <br/>
+                <h:link value="Add Employee" outcome="Insert"></h:link>
+                
+                <br/><br/>
+                
+                <h:selectManyCheckbox id="deptSel" value="#{employeeBean.deptNms}">
+                    <f:ajax event="click" execute="deptSel" render="tb1" />
+                    <f:selectItems value="#{employeeBean.departments}" var="d" itemValue="#{d.deptName}" itemLabel="#{d.deptName}">
+                        
+                    </f:selectItems>
+                </h:selectManyCheckbox>
+                
+                <br/><br/>
+        <h:dataTable id="tb1" var="e" value="#{employeeBean.findAll()}" border="1" cellpadding="1" width="500" cellspacing="1">
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                <h:outputText value="#{e.fname} #{e.lname}"></h:outputText>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Age</f:facet>
+                <h:outputText value="#{e.age}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Salary</f:facet>
+                <h:outputText value="#{e.salary}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Department</f:facet>
+                <h:outputText value="#{e.dept.deptName}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Edit</f:facet>
+                <h:commandLink value="Edit" action="#{employeeBean.edit(e)}"></h:commandLink>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandLink value="Delete" action="#{employeeBean.deleteEmp(e.empId)}" onclick="return confirm('Are you sure?')"></h:commandLink>
+            </h:column>
+        </h:dataTable>
+            </h:form>
+        </center>
+    </h:body>
+</html>
+
